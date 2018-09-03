@@ -5,7 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { BooksComponent } from './books/books.component';
 import { LoginComponent } from './login/login.component';
-
+import { FormsModule }   from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', component: BooksComponent },
@@ -25,7 +25,8 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
