@@ -19,13 +19,19 @@ export class AppService {
         : {}
     );
 
-    this.http.get('user', { headers: headers }).subscribe(response => {
+    // this.http.get('user', { headers: headers }).subscribe(response => {
+    this.http.get('http://172.24.33.82:8082/books/user', { headers: headers })
+    .subscribe(response => {
       if (response['name']) {
         this.authenticated = true;
       } else {
         this.authenticated = false;
       }
       return callback && callback();
+    }, error => {
+      console.log('Erro ao autenticar: ');
+      console.log(error);
+      this.authenticated = false;
     });
   }
 }

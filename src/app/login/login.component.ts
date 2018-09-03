@@ -10,14 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  credentials = {username: '', password: ''};
+  credentials = { username: 'user', password: 'password' };
 
   constructor(private app: AppService, private http: HttpClient, private router: Router) {
   }
 
   login() {
     this.app.authenticate(this.credentials, () => {
-        this.router.navigateByUrl('/');
+      this.router.navigateByUrl('/');
     });
     return false;
   }

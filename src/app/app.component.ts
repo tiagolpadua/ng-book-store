@@ -15,13 +15,18 @@ export class AppComponent {
     private http: HttpClient, private router: Router) {
     this.app.authenticate(undefined, undefined);
   }
-  logout() {
-    this.http.post('logout', {})
-    .pipe(finalize(() => {
-        this.app.authenticated = false;
-        this.router.navigateByUrl('/login');
-    })).subscribe();
+
+  authenticated(): boolean {
+    return this.app.authenticated;
   }
 
-
+  logout() {
+    console.log('iniciando logout');
+    this.http.post('logout', {})
+      .pipe(finalize(() => {
+        console.log('logout concluído');
+        this.app.authenticated = false;
+        this.router.navigateByUrl('/login');
+      })).subscribe();
+  }
 }
