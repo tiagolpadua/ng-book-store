@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { finalize } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +10,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'ng-book-store';
+  constructor(
+    private app: AppService,
+    private http: HttpClient, private router: Router) {
+    this.app.authenticate(undefined, undefined);
+  }
+  logout() {
+    this.http.post('logout', {})
+    .pipe(finalize(() => {
+        this.app.authenticated = false;
+        this.router.navigateByUrl('/login');
+    })).subscribe();
+  }
+
+
 }
